@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sesión reservada — Maestría Social</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<!-- THANK YOU PAGE · Objetivo: maximizar asistencia (show rate) y llegar pre-vendido a la llamada.
+     1) Confirmar por WhatsApp  2) Video pre-llamada de Matías (guion en vsl-guion.html)  3) Casos de su perfil -->
+<body>
+
+<div class="topbar" style="background:var(--teal)">✅ <b style="color:#fff">Tu sesión está reservada</b> — revisa tu correo</div>
+<header class="nav"><span class="logo">Coach Social</span></header>
+
+<section class="hero" style="padding-bottom:40px">
+  <div class="narrow">
+    <span class="eyebrow">Falta 1 paso importante</span>
+    <h1 id="title" style="font-size:clamp(38px,6vw,64px)">¡Listo! Ahora confirma tu asistencia</h1>
+    <p class="sub">Tenemos pocos cupos de sesión por semana. Si no confirmas, liberamos tu horario para otra persona.</p>
+    <!-- Reemplazar número y mensaje -->
+    <a class="btn" href="https://wa.me/00000000000?text=Hola%2C%20acabo%20de%20reservar%20mi%20Sesi%C3%B3n%20de%20Diagn%C3%B3stico%20y%20confirmo%20mi%20asistencia" target="_blank" rel="noopener" data-track="ty_whatsapp">Confirmar por WhatsApp<small>Toma 5 segundos</small></a>
+  </div>
+</section>
+
+<section class="white" style="padding-top:56px">
+  <div class="wrap">
+    <div class="section-head" style="margin-bottom:24px">
+      <span class="eyebrow">Paso 2 · Antes de tu sesión</span>
+      <h2>Mira este mensaje de Matías (3 min)</h2>
+      <p class="muted">Te explica cómo aprovechar al máximo tu sesión y qué tener pensado antes de conectarte.</p>
+    </div>
+    <div class="video">
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#A9C9C6;text-align:center;padding:20px">[VIDEO PRE-LLAMADA · guion en vsl-guion.html → sección 3]</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="narrow">
+    <div class="section-head" style="margin-bottom:24px"><span class="eyebrow">Paso 3 · Prepárate</span><h2>Llega con estas 3 respuestas</h2></div>
+    <ol class="steps">
+      <li><div><h3>¿Cuál fue la última situación en la que sentiste que no te expresaste como querías?</h3><p class="muted" style="margin:0">Una reunión, una conversación con tu jefe, un evento. Mientras más concreta, mejor.</p></div></li>
+      <li><div><h3>¿Qué oportunidad crees que te está costando esto hoy?</h3><p class="muted" style="margin:0">Un ascenso, un aumento, un cliente, el respeto de tu equipo.</p></div></li>
+      <li><div><h3>¿Cómo sería tu trabajo dentro de 60 días si esto estuviera resuelto?</h3><p class="muted" style="margin:0">Así podemos armar un plan realista para ti.</p></div></li>
+    </ol>
+    <div class="card" style="margin-top:28px">
+      <h3>Para que la sesión funcione</h3>
+      <ul class="checks" style="margin-top:10px">
+        <li>Conéctate desde computadora, en un lugar tranquilo y con cámara encendida.</li>
+        <li>Si tomas decisiones importantes con tu pareja o socio, invítalo a la llamada.</li>
+        <li>Si no puedes asistir, reprograma desde el correo de confirmación — no te pierdas tu cupo.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="white">
+  <div class="wrap">
+    <div class="section-head"><span class="eyebrow">Mientras esperas</span><h2>Ellos estuvieron exactamente donde estás hoy</h2></div>
+    <div class="t-grid" data-cases data-limit="6" data-tags="tecnico,lider"></div>
+    <div class="center t-more"><button class="btn teal" data-more>Ver más casos</button></div>
+  </div>
+</section>
+
+<footer><div class="wrap"><p>© 2026 Coach Social LLC · Matías Yabar-Dávila</p></div></footer>
+
+<script src="assets/app.js"></script>
+<script>
+  try {
+    const n = sessionStorage.getItem('cs_nombre');
+    if (n) document.getElementById('title').textContent = `¡Listo, ${n.split(' ')[0]}! Ahora confirma tu asistencia`;
+  } catch (e) {}
+  track('booking_complete'); // Evento de conversión principal (Meta: Schedule)
+</script>
+</body>
+</html>

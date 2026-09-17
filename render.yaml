@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: coach-social-funnel
+    runtime: static
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Robots-Tag
+        value: noindex, nofollow

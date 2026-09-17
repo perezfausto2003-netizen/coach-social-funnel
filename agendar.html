@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reserva tu Sesión de Diagnóstico — Maestría Social</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<!-- BOOKING PAGE (compartida por A y B; la variante llega por ?v= y se guarda en el lead).
+     Paso 1 captura contacto (lead parcial → seguimiento del setter aunque no agende).
+     Paso 2 califica (cargo, situación, urgencia, disposición a invertir).
+     Paso 3 muestra el calendario. -->
+<body>
+
+<div class="topbar">Paso final · <b>Reserva tu Sesión de Diagnóstico gratuita</b></div>
+<header class="nav"><span class="logo">Coach Social</span><span class="stars"><span>★★★★★</span> +100 reseñas</span></header>
+
+<section style="padding-top:20px">
+  <div class="wrap split">
+    <div>
+      <div class="form-card" id="booking">
+        <div class="progress"><i style="width:10%"></i></div>
+
+        <!-- PASO 1 -->
+        <div class="step active" data-step="1">
+          <p class="q" id="hello">Estás a 2 minutos de tu sesión</p>
+          <p class="muted" style="margin:0">¿A dónde te enviamos la confirmación?</p>
+          <label class="f" for="nombre">Nombre</label>
+          <input class="f" id="nombre" autocomplete="given-name" placeholder="Tu nombre">
+          <label class="f" for="email">Correo</label>
+          <input class="f" id="email" type="email" autocomplete="email" placeholder="tu@correo.com">
+          <label class="f" for="wa">WhatsApp (con código de país)</label>
+          <input class="f" id="wa" type="tel" autocomplete="tel" placeholder="+51 999 999 999">
+          <div class="err" id="err1"></div>
+          <button class="btn block" data-next="2">Continuar →</button>
+          <p class="micro center" style="margin-top:10px">🔒 Tus datos son confidenciales. Nunca los compartimos.</p>
+        </div>
+
+        <!-- PASO 2 -->
+        <div class="step" data-step="2">
+          <p class="q">Cuéntanos de ti</p>
+          <p class="muted" style="margin:0">Así tu especialista llega preparado a la sesión.</p>
+          <label class="f" for="cargo">¿Cuál es tu cargo actual?</label>
+          <select class="f" id="cargo">
+            <option value="">Selecciona</option>
+            <option>Gerente / Director</option>
+            <option>Jefe / Coordinador / Líder de equipo</option>
+            <option>Profesional técnico por asumir liderazgo</option>
+            <option>Dueño de negocio / Emprendedor</option>
+            <option>Profesional independiente</option>
+            <option>Estudiante / Sin empleo actualmente</option>
+          </select>
+          <div id="q-situacion">
+            <label class="f" for="situacion">¿Qué te gustaría resolver primero?</label>
+            <select class="f" id="situacion">
+              <option value="">Selecciona</option>
+              <option>Bloquearme frente a superiores</option>
+              <option>Liderar a mi equipo con más seguridad</option>
+              <option>Networking y relaciones profesionales</option>
+              <option>Convencer, negociar y presentar ideas</option>
+              <option>Timidez / ansiedad social en general</option>
+            </select>
+          </div>
+          <div id="q-urgencia">
+            <label class="f" for="urgencia">¿Qué tan pronto quieres resolverlo?</label>
+            <select class="f" id="urgencia">
+              <option value="">Selecciona</option>
+              <option value="ahora">Ahora, me está costando oportunidades</option>
+              <option value="3meses">En los próximos 3 meses</option>
+              <option value="explorando">Solo estoy explorando</option>
+            </select>
+          </div>
+          <label class="f" for="inversion">Maestría Social es un programa premium con mentoría 1 a 1. Si en la sesión vemos que es para ti, ¿estás en posición de invertir en tu desarrollo?</label>
+          <select class="f" id="inversion">
+            <option value="">Selecciona</option>
+            <option value="si">Sí, si veo que me sirve, invierto</option>
+            <option value="cuotas">Sí, idealmente con opciones de pago</option>
+            <option value="no">No por ahora</option>
+          </select>
+          <div class="err" id="err2"></div>
+          <button class="btn block" data-next="3">Ver horarios disponibles →</button>
+          <button class="back" data-prev="1">← Volver</button>
+        </div>
+
+        <!-- PASO 3 -->
+        <div class="step" data-step="3">
+          <p class="q">Elige el horario que mejor te quede</p>
+          <p class="muted" style="margin:0 0 16px">Videollamada 1 a 1. Te enviamos el enlace por correo y WhatsApp.</p>
+          <div class="cal" id="calendar">
+            <div>
+              <b>[EMBED DEL CALENDARIO GHL]</b><br>
+              Pegar aquí el iframe del calendario de GoHighLevel.<br>
+              Configurar su redirección post-reserva a <code>gracias.html</code>.<br><br>
+              <a class="btn" href="gracias.html">Simular reserva (preview)</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- NO CALIFICA -->
+        <div class="step" data-step="nq">
+          <p class="q">Gracias por tu honestidad</p>
+          <p class="muted">Las sesiones de diagnóstico son limitadas, así que las reservamos para quienes están listos para empezar pronto. Mientras tanto, te dejamos contenido gratuito para que avances por tu cuenta:</p>
+          <a class="btn teal block" href="https://www.instagram.com/" target="_blank" rel="noopener">Ver contenido gratuito de Matías</a>
+          <p class="micro center" style="margin-top:10px">Cuando sea tu momento, vuelve a esta página y agenda.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- LATERAL: refuerzo -->
+    <aside>
+      <div class="card" style="margin-bottom:16px" id="quiz-box" hidden>
+        <span class="eyebrow">Tu diagnóstico</span>
+        <p style="margin:12px 0 0">Estilo de carisma predominante: <b id="quiz-style"></b>. En la sesión lo validamos y armamos tu plan.</p>
+      </div>
+      <div class="card">
+        <h3>En tu sesión vas a:</h3>
+        <ul class="checks" style="margin-top:12px">
+          <li>Identificar exactamente en qué situaciones te bloqueas y por qué.</li>
+          <li>Descubrir tu estilo natural de carisma.</li>
+          <li>Salir con un plan claro de 60 días, trabajes con nosotros o no.</li>
+        </ul>
+      </div>
+      <div class="t-grid" style="grid-template-columns:1fr;margin-top:16px" data-cases data-limit="2" data-tags="tecnico"></div>
+    </aside>
+  </div>
+</section>
+
+<footer><div class="wrap"><p>© 2026 Coach Social LLC · <a href="#">Política de privacidad</a></p></div></footer>
+
+<script src="assets/app.js"></script>
+<script>
+(() => {
+  // CONFIG ----------------------------------------------------------------
+  const WEBHOOK_URL = '';            // Webhook de GHL/Zapier/Make para leads parciales (paso 1) y calificados (paso 2)
+  const DISQUALIFY_NO_BUDGET = true; // "No por ahora" en inversión (o estudiante) → no ve el calendario. "Solo explorando" sí agenda; lo filtra el setter.
+  // -----------------------------------------------------------------------
+
+  const params = new URLSearchParams(location.search);
+  const variant = params.get('v') || 'control';
+  const $ = id => document.getElementById(id);
+  const box = $('booking');
+  const bar = box.querySelector('.progress i');
+  let quiz = null;
+  try { quiz = JSON.parse(sessionStorage.getItem('cs_quiz')); } catch (e) {}
+
+  // Personalización si viene del diagnóstico (Variante B): no repetimos preguntas ya respondidas.
+  if (quiz) {
+    $('quiz-box').hidden = false;
+    $('quiz-style').textContent = quiz.estilo;
+    $('hello').textContent = `Tu estilo es ${quiz.estilo}. Reserva tu sesión para validarlo`;
+    $('q-situacion').hidden = true;
+    if (quiz.urgencia) { $('urgencia').value = quiz.urgencia; $('q-urgencia').hidden = true; }
+  }
+
+  const show = s => {
+    box.querySelectorAll('.step').forEach(x => x.classList.toggle('active', x.dataset.step === String(s)));
+    bar.style.width = ({1: '10%', 2: '50%', 3: '90%', nq: '100%'})[s];
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  };
+
+  const send = (stage, data) => {
+    track('booking_' + stage, {v: variant});
+    if (!WEBHOOK_URL) return;
+    fetch(WEBHOOK_URL, {method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({stage, variant, utm: Object.fromEntries(params), quiz, ...data})}).catch(() => {});
+  };
+
+  const contact = () => ({nombre: $('nombre').value.trim(), email: $('email').value.trim(), whatsapp: $('wa').value.trim()});
+
+  box.addEventListener('click', e => {
+    const next = e.target.closest('[data-next]');
+    const prev = e.target.closest('[data-prev]');
+    if (prev) return show(prev.dataset.prev);
+    if (!next) return;
+
+    if (next.dataset.next === '2') {
+      const c = contact();
+      if (c.nombre.length < 2) return $('err1').textContent = 'Escribe tu nombre.';
+      if (!/^\S+@\S+\.\S+$/.test(c.email)) return $('err1').textContent = 'Revisa tu correo.';
+      if (c.whatsapp.replace(/\D/g, '').length < 8) return $('err1').textContent = 'Incluye tu WhatsApp con código de país.';
+      $('err1').textContent = '';
+      try { sessionStorage.setItem('cs_nombre', c.nombre); } catch (err) {}
+      send('lead', c);
+      return show(2);
+    }
+
+    if (next.dataset.next === '3') {
+      const q = {cargo: $('cargo').value, situacion: quiz ? quiz.bloqueo : $('situacion').value, urgencia: $('urgencia').value, inversion: $('inversion').value};
+      if (!q.cargo || !q.situacion || !q.urgencia || !q.inversion) return $('err2').textContent = 'Completa todas las preguntas para continuar.';
+      $('err2').textContent = '';
+      const nq = (DISQUALIFY_NO_BUDGET && q.inversion === 'no') || q.cargo.startsWith('Estudiante');
+      send(nq ? 'no_califica' : 'calificado', {...contact(), ...q});
+      return show(nq ? 'nq' : 3);
+    }
+  });
+})();
+</script>
+</body>
+</html>
