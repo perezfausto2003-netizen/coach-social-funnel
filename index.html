@@ -164,22 +164,13 @@ tr:last-child td{border-bottom:0}
 footer{border-top:1px solid var(--rule-strong);padding-block:36px 96px;color:var(--ink-2);font-size:14px}
 footer p{max-width:70ch}
 
-/* Panel de notas */
-.fab{position:fixed;right:clamp(14px,3vw,28px);bottom:calc(clamp(14px,3vw,28px) + env(safe-area-inset-bottom,0px));z-index:40;background:var(--ink);color:#fff;border:0;padding:13px 20px;font:600 14.5px var(--sans);cursor:pointer;box-shadow:0 6px 24px rgba(17,20,23,.18)}
-.fab:hover{background:var(--accent)}
-.notes{position:fixed;inset:auto 0 0 0;z-index:41;background:var(--bg);border-top:1px solid var(--rule-strong);box-shadow:0 -20px 50px rgba(17,20,23,.13);max-height:84vh;overflow:auto;padding-block:26px calc(26px + env(safe-area-inset-bottom,0px))}
-.notes[hidden]{display:none}
-.notes h3{margin-bottom:6px}
-.fields{display:grid;gap:16px;margin-top:20px;grid-template-columns:repeat(2,1fr)}
-@media (max-width:760px){.fields{grid-template-columns:1fr}}
-.fields label{display:block;font:600 13.5px var(--sans);margin-bottom:6px}
-.fields textarea{width:100%;min-height:64px;padding:11px 13px;border:1px solid var(--rule-strong);font:400 15px var(--sans);background:var(--bg);color:var(--ink);resize:vertical;border-radius:0}
-.fields textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
-.notes .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
-.btn{background:var(--accent);color:#fff;border:0;padding:12px 20px;font:600 15px var(--sans);cursor:pointer}
-.btn.plain{background:transparent;color:var(--ink-2);border:1px solid var(--rule-strong)}
+/* Aviso de feedback */
+.notice{border:1px solid var(--rule-strong);background:var(--accent-soft);padding:clamp(20px,3vw,28px);margin-top:clamp(28px,4vw,40px)}
+.notice .t{font-family:var(--serif);font-size:20px;font-weight:600;margin-bottom:8px}
+.notice p{margin:0;font-size:16px;color:var(--ink-2);max-width:62ch}
+.notice p + p{margin-top:10px}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media print{.masthead,.fab,.notes{display:none}section{break-inside:avoid}}
+@media print{.masthead{display:none}section{break-inside:avoid}}
 </style>
 
 <header class="masthead">
@@ -228,7 +219,7 @@ footer p{max-width:70ch}
     <div class="body"><ol class="steps">
       <li><span class="n">Paso 1</span><h3>Abran los prototipos</h3><p>Funcionan de verdad: se puede hacer el diagnóstico, avanzar por la agenda y llegar a la página de gracias.</p></li>
       <li><span class="n">Paso 2</span><h3>Lean el guion del VSL</h3><p>Está escrito para grabar tal cual, con las dos aperturas y las notas de qué mostrar en pantalla.</p></li>
-      <li><span class="n">Paso 3</span><h3>Déjennos sus notas</h3><p>Con el botón “Mis notas”, abajo a la derecha. Al terminar lo copian y nos lo mandan por el chat.</p></li>
+      <li><span class="n">Paso 3</span><h3>Mándennos su feedback</h3><p>Por WhatsApp, al mismo chat por donde les llegó este link. Con que anoten la sección y qué cambiarían nos alcanza.</p></li>
     </ol></div>
   </section>
 
@@ -494,6 +485,12 @@ footer p{max-width:70ch}
       <div class="callout">
         <p><b>Un punto para conversar.</b> Su VSL actual promete garantía por contrato, pero no figura en el documento de oferta que nos pasaron. El guion nuevo la mantiene porque responde de frente una de las objeciones más fuertes: necesitamos la redacción vigente para usarla tal cual.</p>
       </div>
+
+      <div class="notice">
+        <div class="t">¿Cómo nos hacen llegar sus comentarios?</div>
+        <p>Por <b>WhatsApp</b>, al mismo chat por donde les llegó este link. No hace falta que sea formal: la sección, qué les gustó y qué cambiarían.</p>
+        <p>Si prefieren ir anotando mientras revisan, usen la numeración de las secciones —por ejemplo “02, hallazgo 4” o “06, el hook”— así vamos directo al punto.</p>
+      </div>
     </div></div>
   </section>
 
@@ -504,69 +501,8 @@ footer p{max-width:70ch}
   <p>Propuesta de rediseño de funnel para Coach Social — Maestría Social. Documento de trabajo, septiembre 2026. Las páginas enlazadas son prototipos y no reemplazan al sitio en producción.</p>
 </div></footer>
 
-<button class="fab" id="open-notes" type="button">Mis notas</button>
-
-<div class="notes" id="notes" hidden>
-  <div class="sheet">
-    <h3>Sus notas para Reflex</h3>
-    <p class="small" style="margin:0">Escriban lo que quieran cambiar en cada parte. Se guarda en este navegador. Al terminar, toquen “Copiar todo” y péguenlo en el chat con nosotros.</p>
-    <div class="fields" id="fields"></div>
-    <div class="actions">
-      <button class="btn" id="copy-notes" type="button">Copiar todo</button>
-      <button class="btn plain" id="close-notes" type="button">Cerrar</button>
-      <span class="small" id="notes-status" role="status"></span>
-    </div>
-  </div>
-</div>
-
 <script>
 (() => {
-  const SECTIONS = [
-    ['general', 'Impresión general'],
-    ['a', 'Variante A · El ascenso'],
-    ['b', 'Variante B · No es oratoria'],
-    ['vsl', 'Guion del VSL'],
-    ['funnel', 'Agenda y página de gracias'],
-    ['test', 'Medición y siguientes pasos']
-  ];
-  const KEY = 'reflex_fb_coachsocial';
-  const fields = document.getElementById('fields');
-  const panel = document.getElementById('notes');
-  const status = document.getElementById('notes-status');
-  let saved = {};
-  try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
-
-  fields.innerHTML = SECTIONS.map(([id, label]) =>
-    `<div><label for="fb-${id}">${label}</label><textarea id="fb-${id}" data-k="${id}" placeholder="Sus comentarios…"></textarea></div>`
-  ).join('');
-  SECTIONS.forEach(([id]) => { const t = document.getElementById('fb-' + id); if (saved[id]) t.value = saved[id]; });
-
-  fields.addEventListener('input', e => {
-    saved[e.target.dataset.k] = e.target.value;
-    try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
-    status.textContent = 'Guardado';
-  });
-
-  const toggle = open => { panel.hidden = !open; if (open) document.getElementById('fb-general').focus(); };
-  document.getElementById('open-notes').addEventListener('click', () => toggle(true));
-  document.getElementById('close-notes').addEventListener('click', () => toggle(false));
-  document.addEventListener('keydown', e => e.key === 'Escape' && toggle(false));
-
-  document.getElementById('copy-notes').addEventListener('click', async () => {
-    const text = 'Feedback — Propuesta Reflex / Maestría Social\n\n' + SECTIONS
-      .map(([id, label]) => (saved[id] || '').trim() && `${label}:\n${saved[id].trim()}`)
-      .filter(Boolean).join('\n\n');
-    if (text.split('\n').length < 3) { status.textContent = 'Todavía no hay notas escritas.'; return; }
-    try {
-      await navigator.clipboard.writeText(text);
-      status.textContent = 'Copiado. Ya lo pueden pegar en el chat.';
-    } catch (e) {
-      const t = document.getElementById('fb-general');
-      t.value = text; t.select();
-      status.textContent = 'Seleccionen el texto y cópienlo a mano.';
-    }
-  });
-
   // Progreso de lectura en la barra superior
   const bar = document.getElementById('bar');
   const onScroll = () => {
