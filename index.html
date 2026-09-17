@@ -52,6 +52,7 @@ hr{border:0;border-top:1px solid var(--rule);margin:0}
 .wordmark::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-bottom:1px}
 .masthead .doc-id{font:500 12.5px var(--sans);color:var(--ink-2);text-align:right}
 .masthead .doc-id b{font-weight:600;color:var(--ink)}
+@media (max-width:560px){.masthead .doc-id .long{display:none}}
 .bar{height:2px;background:var(--accent);width:0}
 
 /* Portada */
@@ -184,7 +185,7 @@ footer p{max-width:70ch}
 <header class="masthead">
   <div class="sheet row">
     <span class="wordmark">Reflex</span>
-    <span class="doc-id">Propuesta de rediseño de funnel · <b>Coach Social</b></span>
+    <span class="doc-id"><span class="long">Propuesta de rediseño de funnel · </span><b>Coach Social</b></span>
   </div>
   <div class="bar" id="bar"></div>
 </header>
