@@ -5,350 +5,515 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <title>Rediseño del funnel Maestría Social — Propuesta Reflex</title>
-<style>html{color-scheme:light dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>html{color-scheme:light;background:#fff}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Bebas+Neue&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=Bebas+Neue&display=swap">
 <style>
 :root{
-  --paper:#F2F1EC; --card:#FFFFFF; --ink:#14181A; --ink-2:#5D6A66; --line:#E2DFD6;
-  --accent:#2B4CD6; --accent-soft:#E7EBFB; --ok:#1E7A5A; --warn:#B4551F;
-  --teal:#2B928E; --teal-900:#123F3D; --yellow:#FFD04B;
-  --shadow:0 1px 2px rgba(20,24,26,.05), 0 12px 32px rgba(20,24,26,.07);
-}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --paper:#101312; --card:#181C1B; --ink:#ECEFEC; --ink-2:#9AA7A3; --line:#2A302E;
-  --accent:#8AA3FF; --accent-soft:#1D2440; --ok:#5FCB9F; --warn:#E5945F;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.35);
-}}
-:root[data-theme="dark"]{
-  --paper:#101312; --card:#181C1B; --ink:#ECEFEC; --ink-2:#9AA7A3; --line:#2A302E;
-  --accent:#8AA3FF; --accent-soft:#1D2440; --ok:#5FCB9F; --warn:#E5945F;
-  --shadow:0 1px 2px rgba(0,0,0,.4), 0 14px 34px rgba(0,0,0,.35);
+  color-scheme:light;
+  --bg:#FFFFFF;
+  --ink:#111417;
+  --ink-2:#5A6672;
+  --ink-3:#8A949E;
+  --rule:#E7EAEC;
+  --rule-strong:#C9D0D4;
+  --accent:#0F5F59;
+  --accent-soft:#F2F7F6;
+  --warn:#9A4A20;
+  --tint:#FAFBFB;
+  --teal-900:#123F3D;
+  --yellow:#FFD04B;
+  --serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --sans:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:400 16.5px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-.col{max-width:880px;margin:0 auto;padding-inline:20px}
-h1,h2,h3{font-family:Archivo,system-ui,sans-serif;letter-spacing:-.02em;text-wrap:balance;margin:0}
-h1{font-size:clamp(34px,5.4vw,54px);font-weight:800;line-height:1.05}
-h2{font-size:clamp(26px,3.6vw,34px);font-weight:700;line-height:1.12}
-h3{font-size:19px;font-weight:700;line-height:1.3}
-p{margin:0 0 16px}
-a{color:var(--accent)}
-.lbl{font:600 11.5px/1 'IBM Plex Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2)}
-.muted{color:var(--ink-2)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.62 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.14;letter-spacing:-.011em;margin:0;text-wrap:balance}
+h1{font-size:clamp(33px,5vw,50px);line-height:1.06}
+h2{font-size:clamp(25px,3vw,33px)}
+h3{font-size:19px;line-height:1.3}
+p{margin:0 0 16px;max-width:68ch}
+a{color:var(--accent);text-underline-offset:3px;text-decoration-thickness:1px}
+strong,b{font-weight:600}
+hr{border:0;border-top:1px solid var(--rule);margin:0}
 
-/* Barra superior */
-.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.bar .in{max-width:880px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.mark{font:800 19px/1 Archivo,sans-serif;letter-spacing:-.04em}
-.mark i{font-style:normal;color:var(--accent)}
-.bar .to{font:500 13px Inter;color:var(--ink-2);text-align:right}
+.sheet{max-width:1080px;margin:0 auto;padding-inline:clamp(20px,5vw,56px)}
+.label{font:600 11px/1.4 var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.lede{font-size:clamp(18px,2.1vw,21px);line-height:1.5;color:var(--ink-2);max-width:60ch}
+.small{font-size:15px;color:var(--ink-2)}
+.tint{background:var(--tint)}
+
+/* Encabezado fijo */
+.masthead{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--rule)}
+.masthead .row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:13px}
+.wordmark{font:600 18px/1 var(--serif);letter-spacing:-.02em;display:inline-flex;align-items:baseline;gap:2px}
+.wordmark::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent);margin-bottom:1px}
+.masthead .doc-id{font:500 12.5px var(--sans);color:var(--ink-2);text-align:right}
+.masthead .doc-id b{font-weight:600;color:var(--ink)}
+.bar{height:2px;background:var(--accent);width:0}
 
 /* Portada */
-.hero{padding:56px 0 40px;border-bottom:1px solid var(--line)}
-.hero .lede{font-size:19px;color:var(--ink-2);max-width:62ch;margin-top:20px}
-.meta{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:28px}
-.meta div{min-width:120px}
-.meta b{display:block;font:600 15px Inter;margin-top:3px}
+.cover{padding-block:clamp(44px,7vw,84px) clamp(36px,5vw,56px)}
+.cover h1{margin-block:16px 22px;max-width:19ch}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:clamp(32px,5vw,48px)}
+.facts div{background:var(--bg);padding:16px 18px}
+.facts dt{font:600 11px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+.facts dd{margin:0;font:600 16px var(--sans)}
+@media (max-width:760px){.facts{grid-template-columns:repeat(2,1fr)}}
 
-section{padding:48px 0;border-bottom:1px solid var(--line)}
-section > .col > .lbl{display:block;margin-bottom:10px}
-section h2 + p{margin-top:14px}
+/* Índice */
+.toc{border-top:1px solid var(--rule-strong);margin-top:clamp(36px,5vw,52px)}
+.toc a{display:grid;grid-template-columns:44px 1fr auto;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+.toc a:hover{color:var(--accent)}
+.toc .n{font:600 12px var(--sans);color:var(--ink-3);letter-spacing:.06em}
+.toc .t{font-family:var(--serif);font-size:18px;font-weight:600}
+.toc .d{font-size:13.5px;color:var(--ink-3);text-align:right}
+@media (max-width:640px){.toc a{grid-template-columns:34px 1fr}.toc .d{display:none}}
 
-/* Pasos para revisar */
-.how{display:grid;gap:14px;grid-template-columns:repeat(3,1fr);margin-top:24px;counter-reset:h}
-.how li{list-style:none;counter-increment:h;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
-.how li::before{content:counter(h);display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font:700 13px Inter;margin-bottom:10px}
-.how b{display:block;margin-bottom:4px}
-.how p{margin:0;font-size:14.5px;color:var(--ink-2)}
-@media (max-width:720px){.how{grid-template-columns:1fr}}
+/* Secciones */
+section{padding-block:clamp(44px,6vw,72px);border-top:1px solid var(--rule)}
+.head{display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px;align-items:start;margin-bottom:clamp(24px,3vw,36px)}
+.head .n{font:600 12px var(--sans);color:var(--accent);letter-spacing:.1em;padding-top:8px}
+.head h2{margin-bottom:12px}
+.head p{margin-bottom:0}
+.body{display:grid;grid-template-columns:64px minmax(0,1fr);gap:24px}
+.body > :first-child{grid-column:2}
+.head > *,.body > *{min-width:0}
+@media (max-width:820px){.head,.body{grid-template-columns:minmax(0,1fr);gap:10px}.head .n{padding-top:0}.body > :first-child{grid-column:1}}
 
-/* Diagnóstico */
-.find{border-top:1px solid var(--line);padding:18px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px 28px}
-.find:last-of-type{border-bottom:1px solid var(--line)}
-.find h3{grid-column:1/-1}
-.find .sev{font:600 11px 'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)}
-.find p{margin:0;font-size:15px;color:var(--ink-2)}
-.find .fix{color:var(--ink)}
-.find .fix::before{content:"Lo resolvemos así · ";font-weight:600;color:var(--ok)}
-@media (max-width:720px){.find{grid-template-columns:1fr}}
+/* Pasos */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+.steps li{padding:20px 22px 22px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule)}
+.steps li:last-child{border-right:0}
+.steps .n{font:600 11px var(--sans);letter-spacing:.13em;color:var(--accent)}
+.steps h3{margin:8px 0 6px;font-size:17px}
+.steps p{margin:0;font-size:15px;color:var(--ink-2)}
+@media (max-width:820px){.steps{grid-template-columns:1fr}.steps li{border-right:0}}
+
+/* Hallazgos */
+.finding{display:grid;grid-template-columns:44px minmax(0,1fr);gap:20px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.finding:first-of-type{border-top:1px solid var(--rule-strong)}
+.finding > .n{font:600 13px var(--sans);color:var(--ink-3);padding-top:2px}
+.finding h3{margin-bottom:8px}
+.finding .cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 32px;margin-top:10px}
+.finding .cols p{margin:0;font-size:15.5px;color:var(--ink-2);max-width:none}
+.finding .fix{padding-left:16px;border-left:2px solid var(--accent);color:var(--ink)}
+.finding .fix b{color:var(--accent);font-weight:600}
+.sev{font:600 10.5px var(--sans);letter-spacing:.11em;text-transform:uppercase;color:var(--warn)}
+@media (max-width:820px){.finding{grid-template-columns:30px minmax(0,1fr);gap:12px}.finding .cols{grid-template-columns:1fr}.finding .fix{margin-top:4px}}
 
 /* Prototipos */
-.protos{display:grid;gap:18px;grid-template-columns:1fr 1fr;margin-top:26px}
-@media (max-width:760px){.protos{grid-template-columns:1fr}}
-.proto{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
-.chrome{display:flex;gap:5px;padding:9px 12px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--card) 75%,var(--paper))}
-.chrome i{width:8px;height:8px;border-radius:50%;background:var(--line)}
-.shot{background:var(--teal-900);color:#fff;padding:26px 20px 22px;min-height:186px;display:flex;flex-direction:column;justify-content:center;gap:10px}
-.shot .kicker{font:600 10px 'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow)}
-.shot .head{font-family:'Bebas Neue',Impact,sans-serif;font-size:27px;line-height:1.02;letter-spacing:.4px}
-.shot .head span{background:var(--yellow);color:var(--teal-900);padding:0 4px}
-.shot .fake{display:inline-flex;align-items:center;justify-content:center;background:var(--yellow);color:#14181A;font:700 12px Inter;padding:8px 14px;border-radius:7px;align-self:flex-start}
-.proto .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
-.proto .body p{margin:0;font-size:15px;color:var(--ink-2)}
-.proto .open{margin-top:auto;font:600 15px Inter;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.tagrow{display:flex;flex-wrap:wrap;gap:6px}
-.tag{font:600 11.5px Inter;background:var(--accent-soft);color:var(--accent);padding:4px 9px;border-radius:99px}
+.protos{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,32px)}
+@media (max-width:860px){.protos{grid-template-columns:1fr}}
+.proto{border:1px solid var(--rule);display:flex;flex-direction:column;background:var(--bg);min-width:0}
+.proto .chrome{display:flex;align-items:center;gap:5px;padding:9px 12px;border-bottom:1px solid var(--rule);background:var(--tint)}
+.proto .chrome i{width:7px;height:7px;border-radius:50%;background:var(--rule-strong)}
+.proto .chrome span{margin-left:8px;font:500 11px var(--sans);color:var(--ink-3)}
+.mock{background:var(--teal-900);color:#fff;padding:26px 22px;min-height:180px;display:flex;flex-direction:column;justify-content:center;gap:11px}
+.mock .k{font:600 10px var(--sans);letter-spacing:.15em;text-transform:uppercase;color:var(--yellow)}
+.mock .h{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(22px,2.4vw,27px);line-height:1.04;letter-spacing:.3px}
+.mock .h em{font-style:normal;background:var(--yellow);color:var(--teal-900);padding:0 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.mock .btn{align-self:flex-start;background:var(--yellow);color:#111417;font:600 12px var(--sans);padding:8px 13px}
+.proto .txt{padding:20px 22px 22px;display:flex;flex-direction:column;gap:12px;flex:1}
+.proto .txt p{margin:0;font-size:15.5px;color:var(--ink-2)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:500 12px var(--sans);color:var(--ink-2);border:1px solid var(--rule);padding:3px 9px}
+.proto .go{margin-top:auto;font:600 15px var(--sans);text-decoration:none;color:var(--accent)}
+.proto .go:hover{text-decoration:underline}
 
-/* Funnel */
-.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
-.flow .node{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;position:relative}
-.flow .node .lbl{display:block;margin-bottom:6px;color:var(--accent)}
-.flow .node p{margin:6px 0 0;font-size:14.5px;color:var(--ink-2)}
-@media (max-width:720px){.flow{grid-template-columns:1fr}}
+.callout{border-left:2px solid var(--rule-strong);padding:4px 0 4px 20px;margin-top:28px}
+.callout p{margin:0;font-size:15.5px;color:var(--ink-2)}
+
+/* Recorrido */
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.flow > div{background:var(--bg);padding:22px;min-width:0}
+.flow .n{font:600 11px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--accent)}
+.flow h3{margin:8px 0 8px}
+.flow p{margin:0 0 10px;font-size:15px;color:var(--ink-2)}
+.flow a{font-size:15px}
+@media (max-width:820px){.flow{grid-template-columns:1fr}}
+
+/* Comparativa VSL */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:26px}
+.vs > div{background:var(--bg);padding:22px}
+.vs .now{background:var(--tint)}
+.vs .t{font:600 11px var(--sans);letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.vs .big{font-family:var(--serif);font-size:44px;line-height:1;font-weight:600}
+.vs .now .big{color:var(--ink-2)}
+.vs .new .big{color:var(--accent)}
+.vs ul{margin:14px 0 0;padding-left:18px;font-size:15px;color:var(--ink-2)}
+.vs li{margin-bottom:6px}
+@media (max-width:640px){.vs{grid-template-columns:1fr}}
+
+/* Listas */
+.bullets{margin:0;padding:0;list-style:none;border-top:1px solid var(--rule)}
+.bullets li{padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px;max-width:76ch}
+.bullets li b{font-weight:600}
 
 /* Tabla */
-.tablewrap{overflow-x:auto;margin-top:22px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
-table{width:100%;border-collapse:collapse;font-size:15px;min-width:560px}
-th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);vertical-align:top}
-th{font:600 11.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.tablewrap{overflow-x:auto;max-width:100%;border:1px solid var(--rule);-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse;font-size:15.5px;min-width:520px}
+th,td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font:600 11px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:var(--tint)}
+td:first-child{font-weight:600;white-space:nowrap}
 tr:last-child td{border-bottom:0}
-td b{font-weight:600}
 
-.list{margin:18px 0 0;padding:0;display:grid;gap:10px}
-.list li{list-style:none;display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:15.5px}
-.list li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent);margin-top:9px}
-
-.note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:18px 20px;margin-top:24px}
-.note p:last-child{margin-bottom:0}
+footer{border-top:1px solid var(--rule-strong);padding-block:36px 96px;color:var(--ink-2);font-size:14px}
+footer p{max-width:70ch}
 
 /* Panel de notas */
-.fabs{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40}
-.fab{background:var(--ink);color:var(--paper);border:0;border-radius:99px;padding:13px 20px;font:600 15px Inter;cursor:pointer;box-shadow:var(--shadow)}
-.drawer{position:fixed;inset:auto 0 0 0;z-index:41;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -18px 44px rgba(0,0,0,.18);max-height:82vh;overflow:auto;padding:22px 0 calc(22px + env(safe-area-inset-bottom,0px))}
-.drawer[hidden]{display:none}
-.drawer .in{max-width:880px;margin:0 auto;padding-inline:20px}
-.drawer h3{margin-bottom:4px}
-.fb{display:grid;gap:14px;margin-top:18px}
-.fb label{display:block;font:600 14px Inter;margin-bottom:6px}
-.fb textarea{width:100%;min-height:62px;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font:400 15px Inter;background:var(--paper);color:var(--ink);resize:vertical}
-.fb textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
-.drawer .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;align-items:center}
-.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:12px 18px;font:600 15px Inter;cursor:pointer}
-.btn.ghost{background:transparent;color:var(--ink-2);border:1px solid var(--line)}
-footer{padding:40px 0 120px;color:var(--ink-2);font-size:14px}
-@media (prefers-reduced-motion:no-preference){.proto{transition:transform .15s ease,box-shadow .15s ease}.proto:hover{transform:translateY(-2px)}}
+.fab{position:fixed;right:clamp(14px,3vw,28px);bottom:calc(clamp(14px,3vw,28px) + env(safe-area-inset-bottom,0px));z-index:40;background:var(--ink);color:#fff;border:0;padding:13px 20px;font:600 14.5px var(--sans);cursor:pointer;box-shadow:0 6px 24px rgba(17,20,23,.18)}
+.fab:hover{background:var(--accent)}
+.notes{position:fixed;inset:auto 0 0 0;z-index:41;background:var(--bg);border-top:1px solid var(--rule-strong);box-shadow:0 -20px 50px rgba(17,20,23,.13);max-height:84vh;overflow:auto;padding-block:26px calc(26px + env(safe-area-inset-bottom,0px))}
+.notes[hidden]{display:none}
+.notes h3{margin-bottom:6px}
+.fields{display:grid;gap:16px;margin-top:20px;grid-template-columns:repeat(2,1fr)}
+@media (max-width:760px){.fields{grid-template-columns:1fr}}
+.fields label{display:block;font:600 13.5px var(--sans);margin-bottom:6px}
+.fields textarea{width:100%;min-height:64px;padding:11px 13px;border:1px solid var(--rule-strong);font:400 15px var(--sans);background:var(--bg);color:var(--ink);resize:vertical;border-radius:0}
+.fields textarea:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
+.notes .actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:20px}
+.btn{background:var(--accent);color:#fff;border:0;padding:12px 20px;font:600 15px var(--sans);cursor:pointer}
+.btn.plain{background:transparent;color:var(--ink-2);border:1px solid var(--rule-strong)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media print{.masthead,.fab,.notes{display:none}section{break-inside:avoid}}
 </style>
 
-<div class="bar"><div class="in">
-  <span class="mark">Reflex<i>.</i></span>
-  <span class="to">Propuesta para <b>Coach Social</b> · Maestría Social</span>
-</div></div>
-
-<header class="hero"><div class="col">
-  <span class="lbl">Rediseño de funnel · Septiembre 2026</span>
-  <h1 style="margin-top:14px">Dos caminos nuevos para convertir más llamadas, listos para probar contra la página actual.</h1>
-  <p class="lede">Matías, esto es lo que preparamos: dos versiones completas de la landing con ángulos de venta distintos, la página para agendar, la página de gracias y el guion completo del VSL. Todo se puede abrir y navegar desde acá, como si fuera la página real. Lo único que falta para salir a tráfico es grabar el video nuevo y conectarlo a su GoHighLevel.</p>
-  <div class="meta">
-    <div><span class="lbl">Entregables</span><b>6 piezas navegables</b></div>
-    <div><span class="lbl">Ángulos probados</span><b>2 + control</b></div>
-    <div><span class="lbl">Guion VSL</span><b>6 min · 2 hooks</b></div>
-    <div><span class="lbl">Qué necesitamos</span><b>Su feedback</b></div>
+<header class="masthead">
+  <div class="sheet row">
+    <span class="wordmark">Reflex</span>
+    <span class="doc-id">Propuesta de rediseño de funnel · <b>Coach Social</b></span>
   </div>
-</div></header>
+  <div class="bar" id="bar"></div>
+</header>
 
-<section><div class="col">
-  <span class="lbl">Cómo revisarlo</span>
-  <h2>Tres pasos, unos 20 minutos</h2>
-  <ol class="how">
-    <li><b>Abran los prototipos</b><p>Funcionan de verdad: se puede hacer el diagnóstico, avanzar por la agenda y llegar a la página de gracias.</p></li>
-    <li><b>Lean el guion del VSL</b><p>Está escrito para grabar tal cual, con los dos hooks y las notas de qué mostrar en pantalla.</p></li>
-    <li><b>Déjennos sus notas</b><p>Con el botón “Mis notas” de abajo a la derecha. Al final lo copian y nos lo mandan por el chat.</p></li>
-  </ol>
-</div></section>
+<div class="sheet">
 
-<section><div class="col">
-  <span class="lbl">Punto de partida</span>
-  <h2>Qué encontramos en la página actual</h2>
-  <p class="muted" style="max-width:62ch">Revisamos la landing con el perfil de cliente que nos pasaron y con las objeciones que escuchan en las llamadas. Estas son las oportunidades más grandes, ordenadas por impacto.</p>
+  <div class="cover">
+    <span class="label">Maestría Social · Septiembre 2026</span>
+    <h1>Dos caminos nuevos para convertir más llamadas.</h1>
+    <p class="lede">Matías: preparamos dos versiones completas de la landing con ángulos de venta distintos, la página para agendar, la página de gracias y el guion del VSL. Todo se puede abrir y navegar como si fuera el sitio real. Para salir a tráfico solo falta grabar el video nuevo y conectarlo a su GoHighLevel.</p>
 
-  <div class="find">
-    <h3>1 · No se explica qué los hace distintos</h3>
-    <span class="sev">Impacto alto</span>
-    <p>El método CSI no aparece en ningún lado. Como ustedes mismos señalaron, el prospecto llega creyendo que es un curso de oratoria o algo parecido a terapia, y la página no lo corrige.</p>
-    <p class="fix">una comparación directa contra oratoria, terapia y cursos, más las 3 fases del método con nombre y orden.</p>
+    <dl class="facts">
+      <div><dt>Entregables</dt><dd>7 piezas navegables</dd></div>
+      <div><dt>Ángulos</dt><dd>2 + página actual</dd></div>
+      <div><dt>Guion VSL</dt><dd>5:35 · 2 aperturas</dd></div>
+      <div><dt>Qué necesitamos</dt><dd>Su feedback</dd></div>
+    </dl>
+
+    <nav class="toc" aria-label="Contenido">
+      <a href="#revisar"><span class="n">01</span><span class="t">Cómo revisarlo</span><span class="d">3 pasos, 20 minutos</span></a>
+      <a href="#diagnostico"><span class="n">02</span><span class="t">Qué encontramos hoy</span><span class="d">7 hallazgos</span></a>
+      <a href="#estrategia"><span class="n">03</span><span class="t">Por qué dos ángulos</span><span class="d">Nivel de conciencia</span></a>
+      <a href="#prototipos"><span class="n">04</span><span class="t">Las dos versiones</span><span class="d">Navegables</span></a>
+      <a href="#recorrido"><span class="n">05</span><span class="t">El recorrido completo</span><span class="d">Landing → llamada</span></a>
+      <a href="#vsl"><span class="n">06</span><span class="t">El guion del VSL</span><span class="d">De 8:11 a 5:35</span></a>
+      <a href="#medicion"><span class="n">07</span><span class="t">Cómo sabremos si ganamos</span><span class="d">Criterio y métricas</span></a>
+      <a href="#siguiente"><span class="n">08</span><span class="t">Siguientes pasos</span><span class="d">Después del feedback</span></a>
+    </nav>
   </div>
 
-  <div class="find">
-    <h3>2 · El titular podría ser de cualquier coach</h3>
-    <span class="sev">Impacto alto</span>
-    <p>“Desbloquea tu carisma, vence la timidez…” describe el beneficio, pero no nombra el momento que está viviendo la persona. Sin ese reconocimiento, el video no se mira.</p>
-    <p class="fix">cada variante abre con una situación concreta: el ascenso reciente, o el choque con lo que ya intentó.</p>
-  </div>
-
-  <div class="find">
-    <h3>3 · Ninguna objeción está respondida antes de la llamada</h3>
-    <span class="sev">Impacto alto</span>
-    <p>Las seis objeciones que escuchan en las llamadas (urgencia, precio, tiempo, presencial, “ya lo intenté”, garantía) llegan intactas al closer. Eso alarga llamadas y baja el cierre.</p>
-    <p class="fix">las seis se responden en el VSL y otra vez en las preguntas frecuentes, en el mismo orden de prioridad que nos dieron.</p>
-  </div>
-
-  <div class="find">
-    <h3>4 · La cuenta regresiva juega en contra</h3>
-    <span class="sev">Impacto alto</span>
-    <p>Un contador de 2 minutos que no corresponde a nada real. Con un público analítico y desconfiado, es de las cosas que más rápido rompen la credibilidad.</p>
-    <p class="fix">la sacamos. La urgencia viene del costo real de esperar y de los cupos de mentoría, que sí son limitados.</p>
-  </div>
-
-  <div class="find">
-    <h3>5 · No se sabe qué pasa en la llamada</h3>
-    <span class="sev">Impacto medio</span>
-    <p>“Recibe un plan personalizado” no alcanza para que alguien entregue su agenda. La persona no sabe cuánto dura, con quién habla ni qué se lleva.</p>
-    <p class="fix">la llamada tiene nombre —Sesión de Diagnóstico— y tres resultados concretos que aparecen en la página y en el video.</p>
-  </div>
-
-  <div class="find">
-    <h3>6 · Los testimonios no se pueden leer</h3>
-    <span class="sev">Impacto medio</span>
-    <p>Hoy son imágenes sueltas. Tienen 52 casos documentados: es su activo más fuerte y está subaprovechado.</p>
-    <p class="fix">tarjetas con nombre, cargo y resultado que abren el video, y primero los perfiles técnicos, que es a quien le estamos hablando.</p>
-  </div>
-
-  <div class="find">
-    <h3>7 · La agenda no filtra ni recupera</h3>
-    <span class="sev">Impacto medio</span>
-    <p>Quien no completa la reserva se pierde por completo, y quien reserva llega sin ninguna preparación a la llamada.</p>
-    <p class="fix">la agenda guarda el contacto en el primer paso y la página de gracias empuja la confirmación por WhatsApp.</p>
-  </div>
-</div></section>
-
-<section><div class="col">
-  <span class="lbl">La estrategia</span>
-  <h2>Por qué dos ángulos y no uno</h2>
-  <p class="muted" style="max-width:62ch">Su prospecto sabe que tiene un problema, pero no conoce la solución: hay que educarlo. Eso se puede hacer por dos caminos muy distintos, y no hay forma de saber cuál gana sin medirlos. Por eso hicimos los dos, completos.</p>
-  <ul class="list">
-    <li><b>Variante A</b> entra por el momento: la persona recién ascendida que todavía no se siente líder. Ataca de frente la objeción número uno de ustedes, la falta de urgencia.</li>
-    <li><b>Variante B</b> entra por el mecanismo: separa el programa de la oratoria y la terapia, y le pone nombre al problema —la brecha de presencia— antes de ofrecer nada.</li>
-    <li><b>El funnel también cambia.</b> A conserva la estructura actual, así lo que se mueva se explica por el mensaje. B suma un diagnóstico de 60 segundos que revela el estilo de carisma del visitante antes de pedirle la llamada.</li>
-  </ul>
-</div></section>
-
-<section><div class="col">
-  <span class="lbl">Prototipos</span>
-  <h2>Las dos versiones, navegables</h2>
-  <p class="muted">Se abren en otra pestaña. Esta propuesta queda acá esperándolos.</p>
-
-  <div class="protos">
-    <article class="proto">
-      <div class="chrome"><i></i><i></i><i></i></div>
-      <div class="shot">
-        <span class="kicker">Variante A · El ascenso</span>
-        <div class="head">Te ascendieron por lo que sabes hacer.<br><span>Ahora te evalúan por cómo lo comunicas.</span></div>
-        <span class="fake">Quiero mi Sesión de Diagnóstico</span>
+  <!-- 01 -->
+  <section id="revisar">
+    <div class="head">
+      <span class="n">01</span>
+      <div>
+        <h2>Cómo revisarlo</h2>
+        <p class="small">Tres pasos, unos veinte minutos. No hace falta que revisen nada más que esto.</p>
       </div>
-      <div class="body">
-        <p>Video, el problema, por qué fallaron oratoria y terapia, el método CSI, casos, qué incluye, para quién es y preguntas frecuentes.</p>
-        <div class="tagrow"><span class="tag">Tensión de identidad</span><span class="tag">Costo de esperar</span><span class="tag">Mismo funnel que hoy</span></div>
-        <a class="open" href="variante-a.html?preview=1" target="_blank" rel="noopener">Abrir Variante A →</a>
-      </div>
-    </article>
-
-    <article class="proto">
-      <div class="chrome"><i></i><i></i><i></i></div>
-      <div class="shot" style="background:#0F3634">
-        <span class="kicker">Variante B · No es oratoria</span>
-        <div class="head">Si eres analítico o introvertido,<br><span>un curso de oratoria no va a resolver esto.</span></div>
-        <span class="fake">Descubrir mi estilo de carisma</span>
-      </div>
-      <div class="body">
-        <p>Video, la brecha de presencia, qué NO es el programa, el método, y el diagnóstico de 5 preguntas que devuelve el estilo de carisma y qué lo está frenando.</p>
-        <div class="tagrow"><span class="tag">Diagnóstico interactivo</span><span class="tag">Micro-compromiso</span><span class="tag">Funnel nuevo</span></div>
-        <a class="open" href="variante-b.html?preview=1" target="_blank" rel="noopener">Abrir Variante B →</a>
-      </div>
-    </article>
-  </div>
-
-  <div class="note">
-    <p><b>Lo que ven es un prototipo funcional.</b> El video que aparece es el actual, como referencia de dónde va el nuevo. Las fotos y videos de los casos se cargan desde su Drive solo para esta revisión: al implementar se suben al hosting de la página para que carguen rápido.</p>
-  </div>
-</div></section>
-
-<section><div class="col">
-  <span class="lbl">El recorrido completo</span>
-  <h2>De la landing a la llamada</h2>
-  <div class="flow">
-    <div class="node">
-      <span class="lbl">Paso 1</span>
-      <h3>Landing con el VSL</h3>
-      <p>El botón para agendar aparece cuando el video llega a la oferta, así llega gente que ya entendió la propuesta.</p>
     </div>
-    <div class="node">
-      <span class="lbl">Paso 2</span>
-      <h3>Agenda en 3 pasos</h3>
-      <p>Contacto primero (si abandona, queda el lead para seguimiento), después calificación, y recién ahí el calendario.</p>
-      <p><a href="agendar.html?v=A" target="_blank" rel="noopener">Ver la agenda →</a></p>
+    <div class="body"><ol class="steps">
+      <li><span class="n">Paso 1</span><h3>Abran los prototipos</h3><p>Funcionan de verdad: se puede hacer el diagnóstico, avanzar por la agenda y llegar a la página de gracias.</p></li>
+      <li><span class="n">Paso 2</span><h3>Lean el guion del VSL</h3><p>Está escrito para grabar tal cual, con las dos aperturas y las notas de qué mostrar en pantalla.</p></li>
+      <li><span class="n">Paso 3</span><h3>Déjennos sus notas</h3><p>Con el botón “Mis notas”, abajo a la derecha. Al terminar lo copian y nos lo mandan por el chat.</p></li>
+    </ol></div>
+  </section>
+
+  <!-- 02 -->
+  <section id="diagnostico">
+    <div class="head">
+      <span class="n">02</span>
+      <div>
+        <h2>Qué encontramos en la página actual</h2>
+        <p class="small">Revisamos la landing con el perfil de cliente que nos pasaron y con las objeciones que escuchan en las llamadas. Estas son las oportunidades más grandes, ordenadas por impacto.</p>
+      </div>
     </div>
-    <div class="node">
-      <span class="lbl">Paso 3</span>
-      <h3>Página de gracias</h3>
-      <p>Confirmación por WhatsApp, video previo de Matías y tres preguntas para llegar preparado. Sube la asistencia.</p>
-      <p><a href="gracias.html" target="_blank" rel="noopener">Ver la página →</a></p>
+    <div class="body"><div>
+
+      <article class="finding"><span class="n">01</span><div>
+        <span class="sev">Impacto alto</span>
+        <h3>No se explica qué los hace distintos</h3>
+        <div class="cols">
+          <p>El método CSI no aparece en ningún lado. Como ustedes mismos señalaron, el prospecto llega creyendo que es un curso de oratoria o algo parecido a terapia, y la página no lo corrige.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> Una comparación directa contra oratoria, terapia y cursos, más las tres fases del método con nombre y orden.</p>
+        </div>
+      </div></article>
+
+      <article class="finding"><span class="n">02</span><div>
+        <span class="sev">Impacto alto</span>
+        <h3>El titular podría ser de cualquier coach</h3>
+        <div class="cols">
+          <p>“Desbloquea tu carisma, vence la timidez…” describe el beneficio, pero no nombra el momento que está viviendo la persona. Sin ese reconocimiento, el video no se mira.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> Cada variante abre con una situación concreta: el ascenso reciente, o el choque con lo que ya intentó.</p>
+        </div>
+      </div></article>
+
+      <article class="finding"><span class="n">03</span><div>
+        <span class="sev">Impacto alto</span>
+        <h3>Ninguna objeción está respondida antes de la llamada</h3>
+        <div class="cols">
+          <p>Las seis objeciones que escuchan en las llamadas —urgencia, precio, tiempo, presencial, “ya lo intenté” y garantía— llegan intactas al closer. Eso alarga llamadas y baja el cierre.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> Las seis se responden en el VSL y otra vez en las preguntas frecuentes, en el orden de prioridad que nos dieron.</p>
+        </div>
+      </div></article>
+
+      <article class="finding"><span class="n">04</span><div>
+        <span class="sev">Impacto alto</span>
+        <h3>La cuenta regresiva juega en contra</h3>
+        <div class="cols">
+          <p>Un contador de dos minutos que no corresponde a nada real. Con un público analítico y desconfiado, es de las cosas que más rápido rompen la credibilidad.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> La sacamos. La urgencia viene del costo real de esperar y de los cupos de mentoría, que sí son limitados.</p>
+        </div>
+      </div></article>
+
+      <article class="finding"><span class="n">05</span><div>
+        <span class="sev">Impacto medio</span>
+        <h3>No se sabe qué pasa en la llamada</h3>
+        <div class="cols">
+          <p>“Recibe un plan personalizado” no alcanza para que alguien entregue su agenda. No sabe cuánto dura, con quién habla ni qué se lleva.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> La llamada tiene nombre —Sesión de Diagnóstico— y tres resultados concretos que aparecen en la página y en el video.</p>
+        </div>
+      </div></article>
+
+      <article class="finding"><span class="n">06</span><div>
+        <span class="sev">Impacto medio</span>
+        <h3>Los testimonios no se pueden leer</h3>
+        <div class="cols">
+          <p>Hoy son imágenes sueltas. Tienen 52 casos documentados: es su activo más fuerte y está subaprovechado.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> Tarjetas con nombre, cargo y resultado que abren el video, y primero los perfiles técnicos, que es a quien le hablamos.</p>
+        </div>
+      </div></article>
+
+      <article class="finding"><span class="n">07</span><div>
+        <span class="sev">Impacto medio</span>
+        <h3>La agenda no filtra ni recupera</h3>
+        <div class="cols">
+          <p>Quien no completa la reserva se pierde por completo, y quien reserva llega sin ninguna preparación a la llamada.</p>
+          <p class="fix"><b>Lo resolvemos así.</b> La agenda guarda el contacto en el primer paso y la página de gracias empuja la confirmación por WhatsApp.</p>
+        </div>
+      </div></article>
+
+    </div></div>
+  </section>
+
+  <!-- 03 -->
+  <section id="estrategia" class="tint">
+    <div class="head">
+      <span class="n">03</span>
+      <div>
+        <h2>Por qué dos ángulos y no uno</h2>
+        <p class="small">Su prospecto sabe que tiene un problema, pero no conoce la solución: hay que educarlo. Eso se puede hacer por dos caminos muy distintos, y no hay forma de saber cuál gana sin medirlos. Por eso hicimos los dos, completos.</p>
+      </div>
     </div>
-  </div>
-  <p class="muted" style="margin-top:20px;font-size:15px">En la calificación preguntamos si la persona está en posición de invertir, sin mostrar precios. Quien responde que no, no llega al calendario: le ofrecemos contenido gratuito. Son menos llamadas, pero mejores. Si prefieren que agenden todos y filtrar en la llamada, se cambia en un minuto.</p>
-</div></section>
+    <div class="body"><ul class="bullets">
+      <li><b>Variante A entra por el momento.</b> La persona recién ascendida que todavía no se siente líder. Ataca de frente la objeción número uno de ustedes: la falta de urgencia.</li>
+      <li><b>Variante B entra por el mecanismo.</b> Separa el programa de la oratoria y la terapia, y le pone nombre al problema —la brecha de presencia— antes de ofrecer nada.</li>
+      <li><b>El funnel también cambia.</b> A conserva la estructura actual, así lo que se mueva se explica por el mensaje. B suma un diagnóstico de 60 segundos que revela el estilo de carisma del visitante antes de pedirle la llamada.</li>
+    </ul></div>
+  </section>
 
-<section><div class="col">
-  <span class="lbl">El video</span>
-  <h2>Guion del VSL: de 8 minutos a menos de 6</h2>
-  <p class="muted" style="max-width:62ch">Medimos el video que tienen hoy en la landing y transcribimos su audio para analizarlo minuto a minuto. Dura <b>8 minutos 11 segundos</b> —aunque el propio video anuncia siete— a un ritmo de 162 palabras por minuto. El guion nuevo dice lo mismo y más en <b>5:35</b>, hablando más pausado.</p>
-  <ul class="list">
-    <li><b>Lo que conservamos:</b> los 4 estilos de carisma, que es el mejor momento del video actual; la garantía por contrato; los casos con nombre; y la idea de tribu, ahora dentro de la tercera fase.</li>
-    <li><b>Lo que cambia:</b> en vez de abrir con “imagina cómo sería tu vida”, el video nombra en los primeros 15 segundos a quién le habla y qué le está pasando. Lo aspiracional no califica.</li>
-    <li><b>Aparecen las objeciones.</b> Tiempo, modalidad online y urgencia se responden en 30 segundos antes del cierre. Hoy llegan intactas a la llamada.</li>
-    <li><b>El precio no se menciona:</b> se presenta como inversión, con opciones de pago.</li>
-    <li><b>Incluye el video pre-llamada</b> para la página de gracias, que es de lo que más mueve la asistencia.</li>
-    <li><b>Queda también una versión extendida</b> de 14 minutos para retargeting y comunidad, donde la gente ya conoce a Matías y tolera más minutos.</li>
-  </ul>
-  <p style="margin-top:22px"><a class="open" href="vsl-guion.html" target="_blank" rel="noopener"><b>Leer el guion de 6 minutos y el análisis →</b></a></p>
-</div></section>
+  <!-- 04 -->
+  <section id="prototipos">
+    <div class="head">
+      <span class="n">04</span>
+      <div>
+        <h2>Las dos versiones, navegables</h2>
+        <p class="small">Se abren en otra pestaña. Esta propuesta queda acá esperándolos.</p>
+      </div>
+    </div>
+    <div class="body"><div>
+      <div class="protos">
+        <article class="proto">
+          <div class="chrome"><i></i><i></i><i></i><span>Variante A</span></div>
+          <div class="mock">
+            <span class="k">El ascenso</span>
+            <div class="h">Te ascendieron por lo que sabes hacer.<br><em>Ahora te evalúan por cómo lo comunicas.</em></div>
+            <span class="btn">Quiero mi Sesión de Diagnóstico</span>
+          </div>
+          <div class="txt">
+            <p>Video, el problema, por qué fallaron oratoria y terapia, el método CSI, casos, qué incluye, para quién es y preguntas frecuentes.</p>
+            <div class="tags"><span>Tensión de identidad</span><span>Costo de esperar</span><span>Mismo funnel que hoy</span></div>
+            <a class="go" href="variante-a.html?preview=1" target="_blank" rel="noopener">Abrir Variante A →</a>
+          </div>
+        </article>
 
-<section><div class="col">
-  <span class="lbl">Cómo sabremos si ganamos</span>
-  <h2>El criterio, definido antes de empezar</h2>
-  <p class="muted" style="max-width:62ch">Para no discutir resultados después, dejamos escrito qué miramos y cuándo se declara un ganador.</p>
-  <div class="tablewrap"><table>
-    <tr><th>Tema</th><th>Definición</th></tr>
-    <tr><td><b>Reparto de tráfico</b></td><td>Página actual 34% · Variante A 33% · Variante B 33%, en simultáneo y con los mismos anuncios.</td></tr>
-    <tr><td><b>Métrica principal</b></td><td>Llamadas calificadas agendadas por cada 100 visitantes.</td></tr>
-    <tr><td><b>Métricas de control</b></td><td>Asistencia a la llamada, tasa de cierre y dinero cobrado por visitante, que es la que manda al final.</td></tr>
-    <tr><td><b>Cuándo hay ganador</b></td><td>Mínimo 14 días y 50 llamadas calificadas por versión. Gana si supera a la actual con 90% de confianza y el cierre no cae.</td></tr>
-    <tr><td><b>Después</b></td><td>La ganadora pasa a ser la página oficial y la siguiente prueba es entre los dos hooks del video.</td></tr>
-  </table></div>
-  <p class="muted" style="margin-top:18px;font-size:15px">Si el tráfico semanal es bajo, conviene correr primero la actual contra la A, y después la ganadora contra la B, para que los números alcancen.</p>
-</div></section>
+        <article class="proto">
+          <div class="chrome"><i></i><i></i><i></i><span>Variante B</span></div>
+          <div class="mock" style="background:#0F3634">
+            <span class="k">No es oratoria</span>
+            <div class="h">Si eres analítico o introvertido,<br><em>un curso de oratoria no va a resolver esto.</em></div>
+            <span class="btn">Descubrir mi estilo de carisma</span>
+          </div>
+          <div class="txt">
+            <p>Video, la brecha de presencia, qué NO es el programa, el método, y el diagnóstico de cinco preguntas que devuelve el estilo de carisma y qué lo está frenando.</p>
+            <div class="tags"><span>Diagnóstico interactivo</span><span>Micro-compromiso</span><span>Funnel nuevo</span></div>
+            <a class="go" href="variante-b.html?preview=1" target="_blank" rel="noopener">Abrir Variante B →</a>
+          </div>
+        </article>
+      </div>
 
-<section><div class="col">
-  <span class="lbl">Siguientes pasos</span>
-  <h2>Qué sigue después de su feedback</h2>
-  <ul class="list">
-    <li><b>Ajustes</b> sobre lo que nos marquen en esta revisión.</li>
-    <li><b>Grabación del VSL</b> con los dos hooks y del video pre-llamada.</li>
-    <li><b>Implementación en GoHighLevel:</b> las dos páginas, la agenda con su calendario y la página de gracias.</li>
-    <li><b>Medición:</b> conectamos el pixel de Meta y el analytics para poder leer cada paso del embudo por separado.</li>
-    <li><b>Salida a tráfico</b> con el reparto 34/33/33 y primera lectura a los 14 días.</li>
-  </ul>
-  <div class="note">
-    <p><b>Una cosa que nos gustaría conversar:</b> hoy la oferta no tiene ningún tipo de garantía, y “no quiero invertir en algo que no me garantice resultados” es una de las objeciones que más escuchan. Con 52 casos documentados hay margen para ofrecer algo condicionado al compromiso del alumno. Si les interesa explorarlo, lo sumamos al test.</p>
-  </div>
-</div></section>
+      <div class="callout">
+        <p><b>Lo que ven es un prototipo funcional.</b> El video que aparece es el actual, como referencia de dónde va el nuevo. Las fotos y videos de los casos se cargan desde su Drive solo para esta revisión: al implementar se suben al hosting de la página para que carguen rápido.</p>
+      </div>
+    </div></div>
+  </section>
 
-<footer><div class="col">
-  <p><span class="mark" style="font-size:16px">Reflex<i>.</i></span> · Propuesta de rediseño de funnel para Coach Social — Maestría Social. Documento de trabajo, septiembre 2026.</p>
+  <!-- 05 -->
+  <section id="recorrido" class="tint">
+    <div class="head">
+      <span class="n">05</span>
+      <div>
+        <h2>De la landing a la llamada</h2>
+        <p class="small">Las tres piezas del recorrido, cada una con una función distinta.</p>
+      </div>
+    </div>
+    <div class="body"><div>
+      <div class="flow">
+        <div>
+          <span class="n">Paso 1</span>
+          <h3>Landing con el VSL</h3>
+          <p>El botón para agendar aparece cuando el video llega a la oferta, así llega gente que ya entendió la propuesta.</p>
+        </div>
+        <div>
+          <span class="n">Paso 2</span>
+          <h3>Agenda en 3 pasos</h3>
+          <p>Contacto primero —si abandona, queda el lead para seguimiento—, después calificación, y recién ahí el calendario.</p>
+          <a href="agendar.html?v=A" target="_blank" rel="noopener">Ver la agenda →</a>
+        </div>
+        <div>
+          <span class="n">Paso 3</span>
+          <h3>Página de gracias</h3>
+          <p>Confirmación por WhatsApp, video previo de Matías y tres preguntas para llegar preparado. Sube la asistencia.</p>
+          <a href="gracias.html" target="_blank" rel="noopener">Ver la página →</a>
+        </div>
+      </div>
+      <div class="callout">
+        <p>En la calificación preguntamos si la persona está en posición de invertir, sin mostrar precios. Quien responde que no, no llega al calendario: le ofrecemos contenido gratuito. Son menos llamadas, pero mejores. Si prefieren que agenden todos y filtrar en la llamada, se cambia en un minuto.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 06 -->
+  <section id="vsl">
+    <div class="head">
+      <span class="n">06</span>
+      <div>
+        <h2>El guion del VSL: de 8:11 a 5:35</h2>
+        <p class="small">Medimos el video que tienen hoy en la landing y transcribimos su audio para analizarlo minuto a minuto.</p>
+      </div>
+    </div>
+    <div class="body"><div>
+      <div class="vs">
+        <div class="now">
+          <div class="t">Video actual</div>
+          <div class="big">8:11</div>
+          <p class="small" style="margin:8px 0 0">1.326 palabras a 162 por minuto. El propio video anuncia “siete minutos”.</p>
+          <ul>
+            <li>Abre con “imagina cómo sería tu vida…”</li>
+            <li>Tarda 1:09 en nombrar el problema</li>
+            <li>Nunca dice a quién le habla</li>
+            <li>No responde ninguna objeción</li>
+          </ul>
+        </div>
+        <div class="new">
+          <div class="t">Guion nuevo</div>
+          <div class="big">5:35</div>
+          <p class="small" style="margin:8px 0 0">760 palabras a 150 por minuto: dice más, hablando más pausado.</p>
+          <ul>
+            <li>Dice a quién le habla en los primeros 15 segundos</li>
+            <li>El problema aparece en el minuto 1</li>
+            <li>Tiempo, online y urgencia resueltas antes del cierre</li>
+            <li>Dos aperturas, una por variante</li>
+          </ul>
+        </div>
+      </div>
+
+      <ul class="bullets">
+        <li><b>Lo que conservamos.</b> Los cuatro estilos de carisma, que es el mejor momento del video actual; la garantía por contrato; los casos con nombre; y la idea de tribu, ahora dentro de la tercera fase.</li>
+        <li><b>El precio no se menciona.</b> Se presenta como inversión, con opciones de pago.</li>
+        <li><b>Incluye el video pre-llamada</b> para la página de gracias, que es de lo que más mueve la asistencia.</li>
+        <li><b>Queda también una versión extendida</b> de 14 minutos para retargeting y comunidad, donde la gente ya conoce a Matías y tolera más minutos.</li>
+      </ul>
+
+      <p style="margin-top:26px"><a href="vsl-guion.html" target="_blank" rel="noopener"><b>Leer el guion de 6 minutos y el análisis completo →</b></a></p>
+    </div></div>
+  </section>
+
+  <!-- 07 -->
+  <section id="medicion" class="tint">
+    <div class="head">
+      <span class="n">07</span>
+      <div>
+        <h2>Cómo sabremos si ganamos</h2>
+        <p class="small">Para no discutir resultados después, dejamos escrito qué miramos y cuándo se declara un ganador.</p>
+      </div>
+    </div>
+    <div class="body"><div>
+      <div class="tablewrap"><table>
+        <tr><th>Tema</th><th>Definición</th></tr>
+        <tr><td>Reparto de tráfico</td><td>Página actual 34% · Variante A 33% · Variante B 33%, en simultáneo y con los mismos anuncios.</td></tr>
+        <tr><td>Métrica principal</td><td>Llamadas calificadas agendadas por cada 100 visitantes.</td></tr>
+        <tr><td>Métricas de control</td><td>Asistencia a la llamada, tasa de cierre y dinero cobrado por visitante, que es la que manda al final.</td></tr>
+        <tr><td>Cuándo hay ganador</td><td>Mínimo 14 días y 50 llamadas calificadas por versión. Gana si supera a la actual con 90% de confianza y el cierre no cae.</td></tr>
+        <tr><td>Después</td><td>La ganadora pasa a ser la página oficial y la siguiente prueba es entre las dos aperturas del video.</td></tr>
+      </table></div>
+      <p class="small" style="margin-top:16px">Si el tráfico semanal es bajo, conviene correr primero la actual contra la A, y después la ganadora contra la B, para que los números alcancen.</p>
+    </div></div>
+  </section>
+
+  <!-- 08 -->
+  <section id="siguiente">
+    <div class="head">
+      <span class="n">08</span>
+      <div>
+        <h2>Siguientes pasos</h2>
+        <p class="small">Qué sigue después de su feedback.</p>
+      </div>
+    </div>
+    <div class="body"><div>
+      <ul class="bullets">
+        <li><b>Ajustes</b> sobre lo que nos marquen en esta revisión.</li>
+        <li><b>Grabación del VSL</b> con las dos aperturas y del video pre-llamada.</li>
+        <li><b>Implementación en GoHighLevel:</b> las dos páginas, la agenda con su calendario y la página de gracias.</li>
+        <li><b>Medición:</b> conectamos el pixel de Meta y el analytics para leer cada paso del embudo por separado.</li>
+        <li><b>Salida a tráfico</b> con el reparto 34/33/33 y primera lectura a los 14 días.</li>
+      </ul>
+      <div class="callout">
+        <p><b>Un punto para conversar.</b> Su VSL actual promete garantía por contrato, pero no figura en el documento de oferta que nos pasaron. El guion nuevo la mantiene porque responde de frente una de las objeciones más fuertes: necesitamos la redacción vigente para usarla tal cual.</p>
+      </div>
+    </div></div>
+  </section>
+
+</div>
+
+<footer><div class="sheet">
+  <p><span class="wordmark" style="font-size:15px">Reflex</span></p>
+  <p>Propuesta de rediseño de funnel para Coach Social — Maestría Social. Documento de trabajo, septiembre 2026. Las páginas enlazadas son prototipos y no reemplazan al sitio en producción.</p>
 </div></footer>
 
-<div class="fabs"><button class="fab" id="open-fb" type="button">Mis notas</button></div>
+<button class="fab" id="open-notes" type="button">Mis notas</button>
 
-<div class="drawer" id="drawer" hidden>
-  <div class="in">
+<div class="notes" id="notes" hidden>
+  <div class="sheet">
     <h3>Sus notas para Reflex</h3>
-    <p class="muted" style="font-size:14.5px">Escriban lo que quieran cambiar en cada parte. Se guarda en este navegador. Cuando terminen, toquen “Copiar todo” y péguenlo en el chat con nosotros.</p>
-    <div class="fb" id="fb-fields"></div>
+    <p class="small" style="margin:0">Escriban lo que quieran cambiar en cada parte. Se guarda en este navegador. Al terminar, toquen “Copiar todo” y péguenlo en el chat con nosotros.</p>
+    <div class="fields" id="fields"></div>
     <div class="actions">
-      <button class="btn" id="copy-fb" type="button">Copiar todo</button>
-      <button class="btn ghost" id="close-fb" type="button">Cerrar</button>
-      <span class="muted" id="fb-status" style="font-size:14px" role="status"></span>
+      <button class="btn" id="copy-notes" type="button">Copiar todo</button>
+      <button class="btn plain" id="close-notes" type="button">Cerrar</button>
+      <span class="small" id="notes-status" role="status"></span>
     </div>
   </div>
 </div>
@@ -358,15 +523,15 @@ footer{padding:40px 0 120px;color:var(--ink-2);font-size:14px}
   const SECTIONS = [
     ['general', 'Impresión general'],
     ['a', 'Variante A · El ascenso'],
-    ['b', 'Variante B · No es oratoria + diagnóstico'],
+    ['b', 'Variante B · No es oratoria'],
     ['vsl', 'Guion del VSL'],
     ['funnel', 'Agenda y página de gracias'],
-    ['test', 'Plan de medición y siguientes pasos']
+    ['test', 'Medición y siguientes pasos']
   ];
   const KEY = 'reflex_fb_coachsocial';
-  const fields = document.getElementById('fb-fields');
-  const drawer = document.getElementById('drawer');
-  const status = document.getElementById('fb-status');
+  const fields = document.getElementById('fields');
+  const panel = document.getElementById('notes');
+  const status = document.getElementById('notes-status');
   let saved = {};
   try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
 
@@ -381,12 +546,12 @@ footer{padding:40px 0 120px;color:var(--ink-2);font-size:14px}
     status.textContent = 'Guardado';
   });
 
-  const toggle = open => { drawer.hidden = !open; if (open) document.getElementById('fb-general').focus(); };
-  document.getElementById('open-fb').addEventListener('click', () => toggle(true));
-  document.getElementById('close-fb').addEventListener('click', () => toggle(false));
+  const toggle = open => { panel.hidden = !open; if (open) document.getElementById('fb-general').focus(); };
+  document.getElementById('open-notes').addEventListener('click', () => toggle(true));
+  document.getElementById('close-notes').addEventListener('click', () => toggle(false));
   document.addEventListener('keydown', e => e.key === 'Escape' && toggle(false));
 
-  document.getElementById('copy-fb').addEventListener('click', async () => {
+  document.getElementById('copy-notes').addEventListener('click', async () => {
     const text = 'Feedback — Propuesta Reflex / Maestría Social\n\n' + SECTIONS
       .map(([id, label]) => (saved[id] || '').trim() && `${label}:\n${saved[id].trim()}`)
       .filter(Boolean).join('\n\n');
@@ -400,6 +565,15 @@ footer{padding:40px 0 120px;color:var(--ink-2);font-size:14px}
       status.textContent = 'Seleccionen el texto y cópienlo a mano.';
     }
   });
+
+  // Progreso de lectura en la barra superior
+  const bar = document.getElementById('bar');
+  const onScroll = () => {
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? Math.min(100, window.scrollY / h * 100) : 0) + '%';
+  };
+  addEventListener('scroll', onScroll, {passive: true});
+  onScroll();
 })();
 </script>
 
